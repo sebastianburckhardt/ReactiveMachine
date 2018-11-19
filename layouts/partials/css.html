@@ -14,3 +14,4 @@
 {{- end }}
 {{- $syntaxCss := resources.Get "css/syntax.css" | fingerprint }}
 <link rel="stylesheet" href="{{ $syntaxCss.RelPermalink }}" integrity="{{ $syntaxCss.Data.Integrity }}">
+<link rel="shortcut icon" href="{{ "img/logo-icon.png" | relURL }}">
