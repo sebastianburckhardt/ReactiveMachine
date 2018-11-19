@@ -1,0 +1,27 @@
+{{- $navbarNav := .Site.Params.navbar.nav }}
+{{- $logoUrl   := "img/logo.png" | relURL }}
+<nav class="navbar is-fixed-top">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item">
+        {{ .Site.Title }}
+      </a>
+
+      <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbar-menu" class="navbar-menu">
+      <div class="navbar-end">
+        {{- range $navbarNav }}
+        <a class="navbar-item" href="{{ .link | relURL }}">
+          {{ .text }}
+        </a>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</nav>
