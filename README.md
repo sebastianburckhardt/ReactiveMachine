@@ -21,3 +21,7 @@ All documentation for the site is in the [`content/docs`](content/docs) folder. 
 The list of features listed on the home page is in [`data/features.yaml`](data/features.yaml). The `description` field supports Markdown.
 
 The URL for the image on the main page is set using the `params.imgUrl` parameter in [`config.toml`](config.toml).
+
+## Publishing the site
+
+The site is published automatically by [Netlify](https://netlify.com). Whenever you push changes to `master`, the site will be rebuilt and redeployed. The site *cannot* be published manually.
