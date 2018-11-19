@@ -1,4 +1,9 @@
-serve:
+DOCKER_IMAGE = reactive-machine-docs
+
+install-assets:
+	yarn
+
+serve: install-assets
 	hugo server \
 		--buildDrafts \
 		--buildFuture \
