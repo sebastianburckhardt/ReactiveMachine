@@ -6,14 +6,18 @@ weight: 2
 
 ## Singletons
 
+Something something something.
+
 ```c#
-public interface IClientAffinity 
-        : ISingletonAffinity<IClientAffinity>
+public interface ICounterAffinity 
+        : ISingletonAffinity<ICounterAffinity>
     {
     }
 ```
 
 ## Partitioned
+
+Something something something.
 
 ```c#
 public interface ICounterAffinity :
