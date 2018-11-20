@@ -1,10 +1,10 @@
 ---
 title: Affinities
 description: How to control the partitioning of your data
-weight: 2
+weight: 3
 ---
 
-## Singletons
+## Singleton
 
 Something something something.
 
