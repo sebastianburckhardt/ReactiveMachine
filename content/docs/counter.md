@@ -4,7 +4,11 @@ description: Building a partitioned, distributed incrementable counter
 weight: 2
 ---
 
-Applications are modeled using events.  Here, we model an increment eveent for a counter.  The counter is automatically partitioned using the ```ICounterAffinity``` affinity which requires that the event supply a ```CounterId```.
+## Modeling with Events
+
+With the Reactive Machine, applications can be modeled using events.  
+
+To begin designing our distributed counter, we start by modeling events that comprise the counter: increment events.  These events are automatically partitioned using the ```ICounterAffinity``` affinity which requires that the event supply a partitioning key,  ```CounterId```.
 
 ```c#
 [DataContract]
@@ -50,3 +54,37 @@ public class Counter1 :
 
 The ```ISubscribe``` specifies how you subscribe to events.  In this case, ```Counter1``` will subscribe to all ```IncrementEvents``` and ensure that an instance of the ```On``` method is specified for handling how each event modifies the local state, ```Count```.
 
+Instead of modeling the distributed counter as individual increment operations, we could model the counter using state and operations that transform that state.
+
+## Modeling with State
+
+Here, ```Counter2``` is partitioned state containing one member: ```Count```.  It is partitioned using the same partitioning key and affinity as ```Counter1```.
+
+```c#
+[DataContract]
+public class Counter2 :
+    IPartitionedState<ICounterAffinity,uint>
+{
+    [DataMember]
+    public int Count;
+}
+```
+
+We can then define an increment operation that performs updates.  The ```IUpdate``` interface specifies an update operation that is required to have one method, ```Execute```, that takes an execution context, ```Counter2``` and performs an operation that transforms the state of the counter object.  These operations are automatically routed to the correct node based on the object's affinity.
+
+```c#
+[DataContract]
+public class IncrementUpdate :
+    IUpdate<Counter2, UnitType>,
+    ICounterAffinity
+{
+    [DataMember]
+    public uint CounterId { get; set; }
+
+    public UnitType Execute(IUpdateContext<Counter2> context)
+    {
+        context.State.Count++;
+        return UnitType.Value;
+    }
+}
+```
