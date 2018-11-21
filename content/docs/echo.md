@@ -84,7 +84,7 @@ public class ServerState :
 
 ## Client
 
-...
+Our client is responsible for subscribing to ``PongEvent`` events and when one is received, generates a new ```PingEvent```.  ```ForkEvent``` is used to generate the event and asynchronously schedules the event to be transmitted without blocking.  The local state ```count``` is advanced for each message.
 
 ```c#
 [DataContract]
