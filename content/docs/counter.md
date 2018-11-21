@@ -4,8 +4,6 @@ description: Building a partitioned, distributed incrementable counter
 weight: 2
 ---
 
-## Modeling with Events
-
 With the Reactive Machine, applications can be modeled using events.  
 
 To begin designing our distributed counter, we start by modeling events that comprise the counter: increment events.  These events are automatically partitioned using the ```ICounterAffinity``` affinity which requires that the event supply a partitioning key,  ```CounterId```.
@@ -56,8 +54,6 @@ The ```ISubscribe``` specifies how you subscribe to events.  In this case, ```Co
 
 Instead of modeling the distributed counter as individual increment operations, we could model the counter using state and operations that transform that state.
 
-## Modeling with State
-
 Here, ```Counter2``` is partitioned state containing one member: ```Count```.  It is partitioned using the same partitioning key and affinity as ```Counter1```.
 
 ```c#
@@ -84,6 +80,29 @@ public class IncrementUpdate :
     public UnitType Execute(IUpdateContext<Counter2> context)
     {
         context.State.Count++;
+        return UnitType.Value;
+    }
+}
+```
+
+Since operations can be composed, we can define an operation that performs an
+increment operation and then reads the value after.
+
+```c#
+[DataContract]
+public class IncrementThenRead : 
+    IUpdate<Counter2, UnitType>, 
+    ICounterAffinity
+{
+    [DataMember]
+    public uint CounterId { get; set; }
+
+    public UnitType Execute(IUpdateContext<Counter2> context)
+    {
+        context.PerformUpdate(new IncrementUpdate() { CounterId = CounterId });
+
+        context.Logger.LogDebug($"IncrementThenRead({context.State.Count}) End");
+
         return UnitType.Value;
     }
 }
