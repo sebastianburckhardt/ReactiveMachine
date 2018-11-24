@@ -7,7 +7,7 @@ enableRobotsTXT = true
 disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [params]
-description = "A thing that does reactive stuff"
+description = "Microservices without faults or servers."
 
 [params.home]
 imgUrl = "https://camo.githubusercontent.com/36c0a9ffd8ed22236bd6237d44a1d3eecbaec336/687474703a2f2f692e696d6775722e636f6d2f634c344d4f73532e706e67"
