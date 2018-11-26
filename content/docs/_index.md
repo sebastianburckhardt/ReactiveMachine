@@ -5,7 +5,11 @@ description: Everything you need to know about Reactive Machine
 weight: 1
 ---
 
-Welcome to the Reactive Machine!
+Reactive Machine is a serverless programming model for writing reliable elastic micro-services.
+
+The idea is to express the application logic at a level of abstraction that hides platform failures (machines or connections going down) and configuration choices (e.g. the number of servers). This high-level representation is then compiled and deployed on a back-end host of choice. Importantly, the host can recover from failures transparently and consistently, because our compiler produces a deterministic state machine that makes it possible to reliably track the application state by logging messages and/or persisting snapshots to durable storage.
+
+We plan to build and experiment with many back-ends: all can provide the same application semantics, and are therefore easily interchangeable. But they can exhibit large differences in non-semantic characteristics, such as cost, scalability, latency, throughput, and recovery speed.
 
 ## Programming Model
 

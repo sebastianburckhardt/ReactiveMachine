@@ -1,10 +1,14 @@
 ---
 title: "Example: Counter Service"
 description: Building a partitioned, distributed incrementable counter
-weight: 5
+weight: 13
 ---
 
-With the Reactive Machine, applications can be modeled using events.  
+# Counter Service
+
+Our counter example shows how you can leverage affinities at the application level for transparently routing messages and partitioning state for scalability without requiring the user to manually route messages or handle the partitioning of data themselves.
+
+## Events
 
 To begin designing our distributed counter, we start by modeling events that comprise the counter: increment events.  These events are automatically partitioned using the ```ICounterAffinity``` affinity which requires that the event supply a partitioning key,  ```CounterId```.
 
@@ -19,6 +23,8 @@ public class IncrementEvent :
 }
 ```
 
+## Affinity
+
 To specify how our events should be partitioned on the nodes running the application, we describe the partitioning with the ```ICounterAffinity```.  The ```RoundRobinPlacement``` annotation specifies how the counter should be partitioned on the nodes according to the ```CounterId```.
 
 ```c#
@@ -29,6 +35,8 @@ public interface ICounterAffinity :
     uint CounterId { get; }
 }
 ```
+
+## State
 
 We define application state as a view over the events in the system.  
 
@@ -67,6 +75,8 @@ public class Counter2 :
 ```
 
 We can then define an increment operation that performs updates.  The ```IUpdate``` interface specifies an update operation that is required to have one method, ```Execute```, that takes an execution context, ```Counter2``` and performs an operation that transforms the state of the counter object.  These operations are automatically routed to the correct node based on the object's affinity.
+
+## Operations
 
 ```c#
 [DataContract]

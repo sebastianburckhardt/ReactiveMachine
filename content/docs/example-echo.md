@@ -1,12 +1,14 @@
 ---
 title: "Example: Echo Service"
 description: Building an echo service
-weight: 4
+weight: 12
 ---
 
-...
+# Echo Service
 
-# Affinity
+The Echo service demonstrates how we can build an application that responds to events without the user having to consider failure, partitioning, routing messages or deployment details.
+
+## Affinity
 
 We begin by defining an affinity for the client and the server.  We use the singleton affinities to route everything to a single node.
 

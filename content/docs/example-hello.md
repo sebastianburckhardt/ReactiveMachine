@@ -1,12 +1,16 @@
 ---
 title: "Example: Hello World"
 description: Writing your first reactive machine application
-weight: 3
+weight: 11
 ---
 
-...
+# Hello World
+
+The Hello World example serves to verify that you've got the Reactive Machine built correctly and can get a basic service up and running.  Further examples, like the Echo and Counter examples demonstrate features of the programming model.
 
 ## Definining a service
+
+We begin by defining a new service: ```HelloWorld.Service``` using the Reactive Machine's service builder definition.  This builder will scan the current DLL and generate a service based on the definitions included.
 
 ```c#
 namespace HelloWorld.Service
@@ -26,6 +30,8 @@ namespace HelloWorld.Service
 ```
 
 ## Your First Orchestration
+
+We define a single orchestration, the ```HelloWorld``` orchestration that logs a message and returns the string "Hello World!".
 
 ```c#
 namespace HelloWorld.Service
