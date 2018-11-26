@@ -13,13 +13,13 @@ The Echo service demonstrates how we can build an application that responds to e
 We begin by defining an affinity for the client and the server.  We use the singleton affinities to route everything to a single node.
 
 ```c#
-public interface IClientAffinity 
-    : ISingletonAffinity<IClientAffinity>
+public interface IClientAffinity :
+    ISingletonAffinity<IClientAffinity>
 {
 }
 
-public interface IServerAffinity 
-    : ISingletonAffinity<IServerAffinity>
+public interface IServerAffinity :
+    ISingletonAffinity<IServerAffinity>
 {
 }
 ```

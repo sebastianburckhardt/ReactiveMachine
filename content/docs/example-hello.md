@@ -29,7 +29,7 @@ namespace HelloWorld.Service
 }
 ```
 
-## Your First Orchestration
+## Your first orchestration
 
 We define a single orchestration, the ```HelloWorld``` orchestration that logs a message and returns the string "Hello World!".
 
@@ -51,7 +51,7 @@ namespace HelloWorld.Service
 }
 ```
 
-## Test Service
+## Test service
 
 To test our application, we build a test service with a default orchestration that will be executed on startup, called the startup orchestration.  In this orchestration, we iterate a fixed number of times issuing requests to the Hello World service.
 
