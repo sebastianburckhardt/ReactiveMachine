@@ -117,7 +117,7 @@ public class ClientState :
 
 ## Orchestrations
 
-...
+We can define an orchestration called ```SendFirstPing``` that forks a new event, Ping, that starts the echo example.
 
 ```c#
 public class SendFirstPing : 

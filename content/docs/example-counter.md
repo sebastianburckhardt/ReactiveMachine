@@ -74,9 +74,9 @@ public class Counter2 :
 }
 ```
 
-We can then define an increment operation that performs updates.  The ```IUpdate``` interface specifies an update operation that is required to have one method, ```Execute```, that takes an execution context, ```Counter2``` and performs an operation that transforms the state of the counter object.  These operations are automatically routed to the correct node based on the object's affinity.
-
 ## Operations
+
+We can then define an increment operation that performs updates.  The ```IUpdate``` interface specifies an update operation that is required to have one method, ```Execute```, that takes an execution context, ```Counter2``` and performs an operation that transforms the state of the counter object.  These operations are automatically routed to the correct node based on the object's affinity.
 
 ```c#
 [DataContract]
