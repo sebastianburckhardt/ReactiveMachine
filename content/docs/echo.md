@@ -1,7 +1,7 @@
 ---
-title: "Example: Echo Service Application"
+title: "Example: Echo Service"
 description: Building an echo service
-weight: 3
+weight: 4
 ---
 
 ...
@@ -113,7 +113,7 @@ public class ClientState :
 }
 ```
 
-## Operations
+## Orchestrations
 
 ...
 

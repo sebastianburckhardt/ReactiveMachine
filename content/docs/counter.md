@@ -1,7 +1,7 @@
 ---
-title: "Example: Counter Application"
+title: "Example: Counter Service"
 description: Building a partitioned, distributed incrementable counter
-weight: 3
+weight: 5
 ---
 
 With the Reactive Machine, applications can be modeled using events.  
