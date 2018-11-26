@@ -50,3 +50,54 @@ namespace HelloWorld.Service
     }
 }
 ```
+
+## Test Service
+
+To test our application, we build a test service with a default orchestration that will be executed on startup, called the startup orchestration.  In this orchestration, we iterate a fixed number of times issuing requests to the Hello World service.
+
+Here's the service definition for our test service.
+
+```c#
+namespace HelloWorld.Test
+{
+    /// <summary>
+    /// Provides the building instructions for the hello world service
+    /// </summary>
+    public class HelloWorldTestService : ReactiveMachine.IServiceBuildDefinition
+    {
+        public void Build(IServiceBuilder builder)
+        {
+            // first we import the HelloWorld service
+            builder.BuildService<HelloWorldService>();
+
+            // we build this service by automatically scanning the project for declarations
+            builder.ScanThisDLL();
+        }
+    }
+}
+```
+
+Here's the startup orchestration.
+
+```c#
+namespace HelloWorld.Test
+{
+    /// <summary>
+    /// An orchestration that tests the hello world service,
+    /// and runs automatically when the service is started for the first time
+    /// </summary>
+    public class HelloWorldTestOrchestration : ReactiveMachine.IStartupOrchestration
+    {
+        public async Task<UnitType> Execute(IOrchestrationContext context)
+        {
+            var config = context.GetConfiguration<HelloWorldTestConfiguration>() 
+                ?? new HelloWorldTestConfiguration();
+
+            for (int i = 0; i < config.NumberRepetitions; i++)
+                await context.PerformOrchestration(new HelloWorldOrchestration());
+
+            return UnitType.Value;
+        }
+    }
+}
+```
