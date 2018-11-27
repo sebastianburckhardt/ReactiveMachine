@@ -25,7 +25,7 @@ Activites allow nondeterminism to be effectively "determinized."  Activities are
 
 ## Miner Service
 
-To demonstrate, we provide an example of an activity from a hash-space mining service.  With this example, searching for a hash collision inside of a space can take an arbitrary amount of time to return, with an arbitrary result, otherwise, the time limit expires.  Therefore, we wrap this in an activity to ensure that it remains deterministic.
+To demonstrate, we provide an example of an activity from a hash-space mining service.  With this example, searching for a hash collision inside of a space can take an arbitrary amount of time to return, with an arbitrary result, otherwise, the time limit expires.  Therefore, we wrap this in an activity to ensure that it remains deterministic.  To ensure at-least once execution under failure, we use the ```IAtLeastOnceActivity``` interface.
 
 ```c#
 namespace Miner.Service
@@ -43,7 +43,6 @@ namespace Miner.Service
 
         [DataMember]
         public long Count;
-
 
         public Task<List<long>> Execute(IContext context)
         {
@@ -64,5 +63,3 @@ namespace Miner.Service
     }
 }
 ```
-
-...
